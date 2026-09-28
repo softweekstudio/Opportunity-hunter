@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Agent V1 — Opportunity Hunter</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:900px;margin:auto;padding:24px;background:#f5f5f5;color:#222}
+.card{background:white;border-radius:16px;padding:20px;margin:14px 0;box-shadow:0 2px 10px #0001}
+button{padding:11px 16px;border:0;border-radius:10px;cursor:pointer}
+textarea{width:100%;min-height:260px;padding:12px;box-sizing:border-box;border-radius:10px;border:1px solid #ccc}
+.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#eee}
+</style>
+</head>
+<body>
+<h1>🤖 Opportunity Hunter — V1</h1>
+<p>Prima versione sicura: analizza dati di ricerca e crea opportunità strutturate.</p>
+
+<div class="card">
+<h2>Ricerca manuale</h2>
+<p>Inserisci un JSON con una o più opportunità.</p>
+<textarea id="input">[
+  {
+    "name": "Digital Planner",
+    "description": "Example opportunity",
+    "demand": "high",
+    "competition": "medium",
+    "price": "€5-€12",
+    "source": "manual research",
+    "next_step": "Validate demand with current marketplace data."
+  }
+]</textarea>
+<br><br>
+<button onclick="analyze()">Analizza</button>
+</div>
+
+<div class="card">
+<h2>Risultato</h2>
+<pre id="output">Nessun risultato ancora.</pre>
+</div>
+
+<script>
+function analyze(){
+  try{
+    const data=JSON.parse(document.getElementById('input').value);
+    const results=data.map(x=>{
+      let score=50, reasons=[];
+      const d=(x.demand||'').toLowerCase();
+      const c=(x.competition||'').toLowerCase();
+      if(['high','alta','strong','forte'].some(v=>d.includes(v))){score+=20;reasons.push('Domanda descritta come forte.')}
+      if(['low','bassa','weak','debole'].some(v=>c.includes(v))){score+=15;reasons.push('Concorrenza descritta come relativamente bassa.')}
+      if(['high','alta','strong','forte'].some(v=>c.includes(v))){score-=15;reasons.push('Concorrenza descritta come forte.')}
+      return {...x, score:Math.max(0,Math.min(100,score)), reasons};
+    });
+    document.getElementById('output').textContent=JSON.stringify(results,null,2);
+  }catch(e){
+    document.getElementById('output').textContent='Errore: '+e.message;
+  }
+}
+</script>
+</body>
+</html>

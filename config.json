@@ -1,0 +1,14 @@
+{
+  "agent_name": "Opportunity Hunter",
+  "version": "1.0",
+  "objective": "Find and analyze opportunities for digital products.",
+  "language": "it-IT",
+  "safety": {
+    "spend_money": false,
+    "send_messages": false,
+    "publish_content": false,
+    "make_purchases": false,
+    "login_to_accounts": false,
+    "external_actions_require_confirmation": true
+  }
+}

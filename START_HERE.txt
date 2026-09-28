@@ -1,0 +1,12 @@
+AI AGENT V1 — INIZIA QUI
+
+1. Estrai lo ZIP.
+2. Se hai Python 3, apri un terminale nella cartella.
+3. Esegui: python agent.py
+4. Per provare subito l'interfaccia, apri dashboard.html.
+
+Questa V1 è volutamente sicura: non ha accesso ai tuoi soldi, non compra,
+non invia messaggi e non pubblica automaticamente.
+
+Il prossimo passo è collegare una ricerca web controllata per trasformarla
+in una vera V2.
